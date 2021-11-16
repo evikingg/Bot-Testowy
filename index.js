@@ -88,7 +88,7 @@ client.on('interactionCreate', interaction => {
     }
     
     if(commandName === 'serverinfo') {
-        interaction.reply('Nazwa: ' + interaction.guild.name + ' /n' + 'Ilość użytkowników: ' + interaction.guild.memberCount);
+        interaction.reply('Nazwa: ' + interaction.guild.name + '\n' + 'Ilość użytkowników: ' + interaction.guild.memberCount);
     }
 })
 
@@ -108,4 +108,4 @@ client.on('messageCreate', message => {
 })
 
 
-client.login('token');
+client.login('Token');
