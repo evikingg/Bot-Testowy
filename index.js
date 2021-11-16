@@ -6,7 +6,6 @@ const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES
-        
     ]
 })
 
@@ -76,7 +75,7 @@ client.on('interactionCreate', interaction => {
                 .addField('Command:', 'toffumode', true)
                 .addField('Description:', 'toffumode został wyłączony', true)
                 .setFooter('...');
-                
+
             toggleToffuMode = 0;
             interaction.reply({ content: 'Done!', embeds: [ToffuModeOffEmbed], ephemeral: true })
             interaction.guild.channels.cache.get('909904844523974667').setName('ToffuMode: OFF');
