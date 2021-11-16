@@ -30,10 +30,10 @@ client.on('interactionCreate', interaction => {
 
         if(toggleToffuMode === 0) {         // WŁĄCZ/WYŁĄCZ TOFFU MODE
             toggleToffuMode = 1;
-            interaction.channel.send('ToffuMode został włączony');
+            interaction.reply('ToffuMode został włączony');
         } else {
             toggleToffuMode = 0;
-            interaction.channel.send('ToffuMode został wyłączony');
+            interaction.reply('ToffuMode został wyłączony');
         }
     }
 
