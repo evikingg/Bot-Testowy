@@ -1,5 +1,6 @@
 const { Client, Intents } = require("discord.js");
 
+const { MessageEmbed } = require('discord.js');
 const discord = require('discord.js');
 const client = new Client({
     intents: [
@@ -9,10 +10,31 @@ const client = new Client({
     ]
 })
 
+const ToffuModeOnEmbed = new MessageEmbed()
+	.setColor('#0000ff')
+	.setTitle('ToffuMode')
+	.setAuthor('ToffuBot')
+	.setDescription('ToffuMode został włączony')
+	.addFields(
+		{ name: 'ToffuMode', value: 'Teraz toffu nie będzie mógł nic pisać. PogChamp!' },
+	)
+	.setFooter('Yayy!');
+
+const ToffuModeOffEmbed = new MessageEmbed()
+	.setColor('#0000ff')
+	.setTitle('ToffuMode')
+	.setAuthor('ToffuBot')
+	.setDescription('ToffuMode został wyłączony...')
+	.addFields(
+		{ name: 'ToffuMode', value: 'Teraz toffu będzie mógł już wysyłać wiadomości. Sadge...' },
+	)
+	.setFooter(':(');
+
 const tofuID = '543879286554230784';
 
 var toggleToffuMode = 0;
 
+////////////////////////////////////////////////////////////////////////////////////////
 
 client.on('ready', () => {
     console.log('Bot jest online!');
@@ -32,13 +54,33 @@ client.on('interactionCreate', interaction => {
         }
 
         if(toggleToffuMode === 0) {         // WŁĄCZ/WYŁĄCZ TOFFU MODE
+            const Log = new MessageEmbed()
+                .setColor('0080000')
+                .setTitle('Log Pomagiera(wiadomość automatyczna)')
+                .setAuthor('Pomagier', 'https://imgur.com/Bt4MTTb')
+                .setDescription('User: ' + interaction.user.tag)
+                .addField('Command:', 'toffumode', true)
+                .addField('Description:', 'toffumode został włączony', true)
+                .setFooter('...');
+
             toggleToffuMode = 1;
-            interaction.reply('ToffuMode został włączony');
+            interaction.reply({ content: 'Done!', embeds: [ToffuModeOnEmbed], ephemeral: true })
             interaction.guild.channels.cache.get('909904844523974667').setName('ToffuMode: ON');
+            interaction.guild.channels.cache.get('909893873935990784').send({embeds: [Log]});
         } else {
+            const Log = new MessageEmbed()
+                .setColor('0080000')
+                .setTitle('Log Pomagiera(wiadomość automatyczna)')
+                .setAuthor('Pomagier', 'https://imgur.com/Bt4MTTb')
+                .setDescription('User: ' + interaction.user.tag)
+                .addField('Command:', 'toffumode', true)
+                .addField('Description:', 'toffumode został wyłączony', true)
+                .setFooter('...');
+                
             toggleToffuMode = 0;
-            interaction.reply('ToffuMode został wyłączony');
+            interaction.reply({ content: 'Done!', embeds: [ToffuModeOffEmbed], ephemeral: true })
             interaction.guild.channels.cache.get('909904844523974667').setName('ToffuMode: OFF');
+            interaction.guild.channels.cache.get('909893873935990784').send({embeds: [Log]});
         }
     }
 
@@ -47,7 +89,7 @@ client.on('interactionCreate', interaction => {
     }
     
     if(commandName === 'serverinfo') {
-        interaction.reply('Nazwa: ' + interaction.guild.name + 'Ilość użytkowników: ' + interaction.guild.memberCount);
+        interaction.reply('Nazwa: ' + interaction.guild.name + ' /n' + 'Ilość użytkowników: ' + interaction.guild.memberCount);
     }
 })
 
