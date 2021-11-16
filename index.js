@@ -107,4 +107,6 @@ client.on('messageCreate', message => {
     }
 })
 
+//tak
+
 client.login('Token');
