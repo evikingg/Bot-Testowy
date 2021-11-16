@@ -27,17 +27,17 @@ client.on('interactionCreate', interaction => {
 
     if(commandName === 'toffumode') {
         if(!interaction.member.roles.cache.some(role => role.name === 'HEAD ADMIN')) {      // KOMENDA TYLKO DLA H@
-            interaction.channel.send('Nie masz do tego uprawnień do użycia ' + commandName + ' ' + interaction.member.user.tag + ' !');
+            interaction.reply('Nie masz do tego uprawnień do użycia ' + commandName + ' ' + interaction.member.user.tag + ' !');
             return;
         }
 
         if(toggleToffuMode === 0) {         // WŁĄCZ/WYŁĄCZ TOFFU MODE
             toggleToffuMode = 1;
-            interaction.channel.send('ToffuMode został włączony');
+            interaction.reply('ToffuMode został włączony');
             interaction.guild.channels.cache.get('909904844523974667').setName('ToffuMode: ON');
         } else {
             toggleToffuMode = 0;
-            interaction.channel.send('ToffuMode został wyłączony');
+            interaction.reply('ToffuMode został wyłączony');
             interaction.guild.channels.cache.get('909904844523974667').setName('ToffuMode: OFF');
         }
     }
