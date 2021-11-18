@@ -140,10 +140,17 @@ client.on('interactionCreate', interaction => {
         interaction.reply({content: 'Twoja propozycja została zgłoszona', ephemeral: true})
         interaction.guild.channels.cache.get('909893873935990784').send({embeds: [Log]})
     }
+
+    if(commandName === 'pingowanko') {          // PINGOWANKO
+        interaction.reply({content: 'Done', ephemeral: true})
+        for(let x = 0; x < interaction.options.getInteger('liczba'); x++) {
+            interaction.channel.send({content: interaction.options.getUser('user').toString(), timeout: 10});
+        }
+    }
 })
 
 client.on('messageCreate', message => {
-    if(message.author.tag === toffuModeUser.tag && toggleToffuMode === 1) {       // USUWANIE WIADOMOŚCI TOFA
+    if(message.author === toffuModeUser && toggleToffuMode === 1) {       // USUWANIE WIADOMOŚCI TOFA
         message.delete({timeout: 10});
         message.channel.send('`:)`');
 
@@ -170,5 +177,6 @@ client.on('messageCreate', message => {
         message.react(downvoteEmoji);
     }
 })
+
 
 client.login('Token');
