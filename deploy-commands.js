@@ -15,8 +15,11 @@ const commands = [
 		.setName('propozycja')
 		.setDescription('Chcesz coś zaproponować? Może nową funkcję bota? Wpisz tą komendę!')
 		.addStringOption(option => option.setName('title').setDescription('Wpisz tytuł swojej propozycji').setRequired(true))
-		.addStringOption(option => option.setName('description').setDescription('Wpisz opis swojej propozycji').setRequired(true))
-]
+		.addStringOption(option => option.setName('description').setDescription('Wpisz opis swojej propozycji').setRequired(true)),
+	new SlashCommandBuilder().setName('pingowanko').setDescription('Pinguj kogoś ile razy chcesz.')
+	.addIntegerOption(option => option.setName('liczba').setDescription('liczba pingów').setRequired(true))
+	.addUserOption(option => option.setName('user').setDescription('Kogo mam spingować?').setRequired(true))
+	]
 .map(command => command.toJSON());
 
 const rest = new REST({ version: '9' }).setToken(token);
