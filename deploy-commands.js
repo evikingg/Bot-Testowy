@@ -5,7 +5,17 @@ const { clientId, guildId, token } = require('./config.json');
 
 const commands = [
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
-	new SlashCommandBuilder().setName('toffumode').setDescription('Tunrs on/off the ultimate "Toffu Mode"!')
+	new SlashCommandBuilder()
+	.setName('toffumodeon')
+	.setDescription('Tunrs on the ultimate "Toffu Mode"!')
+	.addUserOption(option => option.setName('user').setDescription('Dla jakiego użytkownika chcesz włączyć ToffuMode?').setRequired(true)),
+    new SlashCommandBuilder().setName('serverinfo').setDescription('returns server info'),
+	new SlashCommandBuilder().setName('toffumodeoff').setDescription('Tunrs off the ultimate "ToffuMode"'),
+	new SlashCommandBuilder()
+		.setName('propozycja')
+		.setDescription('Chcesz coś zaproponować? Może nową funkcję bota? Wpisz tą komendę!')
+		.addStringOption(option => option.setName('title').setDescription('Wpisz tytuł swojej propozycji').setRequired(true))
+		.addStringOption(option => option.setName('description').setDescription('Wpisz opis swojej propozycji').setRequired(true))
 ]
 .map(command => command.toJSON());
 
