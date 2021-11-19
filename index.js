@@ -171,4 +171,20 @@ client.on('messageCreate', message => {
     }
 })
 
-client.login('Token');
+
+
+fs = require('fs');
+var token = fs.readFileSync('./token.txt', 'utf8', function (err,data) {
+  if (err) {
+    console.log(err);
+    console.log("Hej tutaj TOKEN bota discord");
+    console.log("Nie moge otrzymać dostępu do pliku token.txt");
+    console.log("Sprawdz czy napewno wszytko jest ok z tym plikiem");
+    console.log("Dzieki :)");
+    console.log("DISCORD_BOT");
+    process.exit(1); 
+  }
+  console.log(data);
+});
+
+client.login(token.trimEnd());
