@@ -1,5 +1,5 @@
 const { Client, Intents } = require("discord.js");
-
+const cowsay = require("cowsay");
 const { MessageEmbed } = require('discord.js');
 const discord = require('discord.js');
 const client = new Client({
@@ -140,9 +140,20 @@ client.on('interactionCreate', interaction => {
         interaction.reply({content: 'Twoja propozycja została zgłoszona', ephemeral: true})
         interaction.guild.channels.cache.get('909893873935990784').send({embeds: [Log]})
     }
+    if (commandName === 'tofusay'|| commandName === 'toffusay'){
+        console.log("wtf") ;
+    }
+            
 })
 
 client.on('messageCreate', message => {
+    
+    // console.log(message)
+
+    /* moonboy 
+     * toffuModeUser.tag cant be found 
+     * function disable for moment
+
     if(message.author.tag === toffuModeUser.tag && toggleToffuMode === 1) {       // USUWANIE WIADOMOŚCI TOFA
         message.delete({timeout: 10});
         message.channel.send('`:)`');
@@ -158,6 +169,7 @@ client.on('messageCreate', message => {
 
         message.guild.channels.cache.get(`910946091103576125`).send({embeds: [Log]});
     }
+    */
 
     if(message.channel.name === 'liczenie-znakow' && message.author.bot === false && message.author.id !== '543879286554230784') {
         message.reply({
@@ -169,6 +181,71 @@ client.on('messageCreate', message => {
         message.react(upvoteEmoji);
         message.react(downvoteEmoji);
     }
+
+
+    // rest of funciton is for hidden commands 
+    if (message.content[0] != "!") {
+        return;
+    }
+
+    var command = message.content.substring(1).split(" ");
+    if(message.author.id == client.user.id) return;
+
+    // tofusay 
+    if(command[0] == "tofusay" || command[0] == "toffusay"){
+        var animal = "boy"
+        var text = "@tofu is the greates player in MyLittlePony on word";
+        var done = true;
+
+        // list all evable cow in direcory
+        if (command[1] == "--help") {
+            message.channel.send("!tofusay to interaktna komenda\n"+
+                "Pozwala ona na włożenie w usta tofa pewną wiadomość\n"+ 
+                "Opcje:\n"+
+                " !tofusay -f <inneformat> <text>\n"+
+                "    mozna wybrać inną postać\n"+
+                " !tofusay --list\n"+
+                "    wyświetla pomoc\n"+
+                " !tofusay --help\n"+
+                "    Wyswietla pomoc");
+        } else if(command[1] == "--list"){
+            var cows = fs.readdirSync('./cows', {withFileTypes: true})
+                .filter(item => !item.isDirectory())
+                .map(item => item.name);
+
+            var responce = "Inne możliwości to:"
+
+            cows.forEach( i => {
+                responce += "\n--- " + i.toString()
+                    .substring(0, i.length-4 );
+            });
+            message.channel.send(responce);    
+        } else{   
+        // responde to message 
+            var responce = ""
+            var slice_from = 1;
+
+            // chenge animal
+            if(command[1] == "-f"){
+                animal = command[2]
+                slice_from = 3
+            }
+
+            // merge text of message
+            if(command.length != slice_from){
+                text = command.slice(slice_from).join(" ");
+            }
+
+            console.log("./cows/" + animal + ".cow",);
+            responce = cowsay.say({
+                f: "./cows/" + animal + ".cow",
+                text: text
+            });
+            message.channel.send(responce);    
+        }
+
+    }
+;
 })
 
 
