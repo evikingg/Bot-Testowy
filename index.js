@@ -236,7 +236,6 @@ client.on('messageCreate', message => {
                 text = command.slice(slice_from).join(" ");
             }
 
-            console.log("./cows/" + animal + ".cow",);
             responce = cowsay.say({
                 f: "./cows/" + animal + ".cow",
                 text: text

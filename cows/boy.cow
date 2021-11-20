@@ -1,5 +1,5 @@
-$the_cow = <<EOC
-    $thoughts
+$the_cow = <<EOC;
+   $thoughts
       $thoughts
         ▓▓▓▓▓▓▓▓▒▒            
       ▓▓▓▓▓▓▒▒▒▒▓▓▒▒          
