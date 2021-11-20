@@ -1,5 +1,5 @@
 # Box
-$the_cow = <<EOC;
+$the_cow = <<EOC
      $thoughts
       $thoughts
 ░░░░░░░░░░░█▀▀░░█░░░░░░
